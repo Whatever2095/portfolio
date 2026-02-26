@@ -109,7 +109,7 @@ a:hover { opacity: 0.8 !important; }
   border: 2.5px solid var(--accent) !important;
   box-shadow: 0 0 0 5px rgba(0,217,163,0.15), 0 0 30px rgba(0,217,163,0.2) !important;
   transition: box-shadow 0.3s ease, transform 0.3s ease !important;
-  margin: 0 0 1.6em 0 !important;
+  margin: 0 0 1.6em auto !important;
   flex-shrink: 0;
 }
 #header .image.avatar:hover {
@@ -120,6 +120,7 @@ a:hover { opacity: 0.8 !important; }
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  object-position: center 15% !important;
   border-radius: 0 !important;
   border: none !important;
   box-shadow: none !important;
