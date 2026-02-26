@@ -1,0 +1,676 @@
+/* =========================================================
+   NEELIMA DEVULAPALLI — CUSTOM THEME
+   Dark SRE/DevOps Aesthetic
+   ========================================================= */
+
+/* ── Google Fonts ───────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Custom Properties ──────────────────────────────── */
+:root {
+  --bg:           #08090e;
+  --bg-surface:   #0e0f16;
+  --bg-card:      #13141d;
+  --bg-card-hover:#181925;
+  --border:       rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+
+  --accent:       #00d9a3;
+  --accent-dim:   rgba(0, 217, 163, 0.12);
+  --accent-glow:  0 0 30px rgba(0,217,163,0.25);
+  --accent2:      #a78bfa;
+  --accent2-dim:  rgba(167,139,250,0.12);
+
+  --text:         #e2e8f0;
+  --text-muted:   #94a3b8;
+  --text-faint:   #475569;
+
+  --radius:       10px;
+  --radius-sm:    6px;
+  --transition:   0.22s ease;
+
+  /* sidebar width — must match main.css */
+  --sidebar-w:    22em;
+}
+
+/* ── Base Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: 'Inter', 'Source Sans Pro', sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography overrides ───────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+}
+
+p { color: var(--text-muted) !important; }
+
+strong, b { color: var(--text) !important; font-weight: 600 !important; }
+
+a {
+  color: var(--accent) !important;
+  border-bottom-color: transparent !important;
+  transition: color var(--transition), opacity var(--transition) !important;
+}
+a:hover { opacity: 0.8 !important; }
+
+/* ── Sidebar / Header ───────────────────────────────────── */
+#header {
+  background: var(--bg-surface) !important;
+  border-right: 1px solid var(--border) !important;
+  /* Subtle grid background */
+  background-image:
+    linear-gradient(var(--bg-surface), var(--bg-surface)),
+    radial-gradient(circle at 30% 107%, rgba(0,217,163,0.08) 0%, transparent 50%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing orb behind avatar */
+#header::before {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(0,217,163,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#header .inner {
+  position: relative;
+  z-index: 1;
+  padding: 2.5em 2em !important;
+}
+
+/* Avatar ring */
+#header .image.avatar {
+  border: none !important;
+  margin-bottom: 1.4em;
+}
+#header .image.avatar img {
+  border-radius: 50% !important;
+  border: 2.5px solid var(--accent) !important;
+  box-shadow: 0 0 0 5px rgba(0,217,163,0.15), 0 0 30px rgba(0,217,163,0.2) !important;
+  transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+  display: block;
+  width: 6.5em !important;
+  height: 6.5em !important;
+  object-fit: cover;
+}
+#header .image.avatar img:hover {
+  box-shadow: 0 0 0 6px rgba(0,217,163,0.25), 0 0 45px rgba(0,217,163,0.35) !important;
+  transform: scale(1.03);
+}
+
+/* Sidebar headings */
+#header h1 {
+  font-size: 1.15em !important;
+  line-height: 1.5 !important;
+  color: var(--text) !important;
+}
+#header h1 strong {
+  font-size: 1.2em !important;
+  color: #fff !important;
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+/* Sidebar location */
+#header p {
+  color: var(--text-muted) !important;
+  font-size: 0.82em !important;
+  line-height: 1.6 !important;
+  margin-bottom: 0.4em !important;
+}
+
+/* Sidebar social icons */
+#header .icons {
+  margin-top: 1.4em !important;
+  display: flex;
+  gap: 6px;
+}
+#header .icons li { padding: 0 !important; }
+#header .icons li a {
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  border-radius: 8px !important;
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.85em !important;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition) !important;
+}
+#header .icons li a:hover {
+  background: var(--accent-dim) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  transform: translateY(-2px) !important;
+}
+#header .icons .label { display: none; }
+
+/* Sidebar nav dots (if any) */
+#header nav a { color: var(--text-muted) !important; }
+
+/* ── Main content ───────────────────────────────────────── */
+#main {
+  padding: 3em 3.5em !important;
+}
+
+@media screen and (max-width: 980px) {
+  #main { padding: 2em 1.5em !important; }
+}
+@media screen and (max-width: 480px) {
+  #main { padding: 1.5em 1em !important; }
+}
+
+/* ── Section styles ─────────────────────────────────────── */
+#main section {
+  padding: 2.5em 0 !important;
+  border: none !important;
+}
+
+/* Gradient section heading */
+#main h2 {
+  font-size: 1.4em !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  margin-bottom: 0.3em !important;
+  position: relative;
+  display: inline-block;
+}
+#main h2::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 100%;
+  margin-top: 6px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+}
+
+#main h3 {
+  font-size: 1.05em !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+}
+
+/* About section header */
+#one .major h2 {
+  font-size: 2em !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.2em !important;
+  display: block;
+}
+#one .major h2::after { display: none; }
+
+/* ── Stat Cards ─────────────────────────────────────────── */
+.stat-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin: 1.8em 0 !important;
+}
+
+.stat-card {
+  flex: 1 1 130px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 3px solid var(--accent) !important;
+  padding: 1em 1.2em !important;
+  border-radius: var(--radius-sm) !important;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,217,163,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.stat-card:hover {
+  border-color: rgba(255,255,255,0.1) !important;
+  border-left-color: var(--accent) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+}
+
+.stat-card .stat-number {
+  font-size: 1.8em !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+  line-height: 1 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.stat-card .stat-label {
+  font-size: 0.72em !important;
+  color: var(--text-faint) !important;
+  margin-top: 5px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+.button {
+  background: transparent !important;
+  border: 1px solid var(--accent) !important;
+  color: var(--accent) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 0.82em !important;
+  padding: 0.65em 1.6em !important;
+  border-radius: 6px !important;
+  letter-spacing: 0.03em !important;
+  transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+}
+.button:hover {
+  background: var(--accent-dim) !important;
+  color: var(--accent) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(0,217,163,0.2) !important;
+  border-color: var(--accent) !important;
+}
+.button.primary {
+  background: var(--accent) !important;
+  color: #000 !important;
+  border-color: var(--accent) !important;
+  font-weight: 600 !important;
+}
+.button.primary:hover {
+  background: #00f2b5 !important;
+  box-shadow: 0 4px 20px rgba(0,217,163,0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ── Skill Tags ─────────────────────────────────────────── */
+.skill-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 7px !important;
+  margin: 0.5em 0 1.2em !important;
+}
+
+.skill-tag {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.75em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition) !important;
+  cursor: default;
+  white-space: nowrap;
+}
+.skill-tag:hover {
+  background: var(--accent-dim) !important;
+  border-color: rgba(0,217,163,0.4) !important;
+  color: var(--accent) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Skill category headings */
+#skills h4 {
+  font-size: 0.72em !important;
+  font-weight: 600 !important;
+  color: var(--accent) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  margin-bottom: 0.6em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ── Project Cards ──────────────────────────────────────── */
+.project-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+  height: 100%;
+}
+.project-card:hover {
+  border-color: var(--border-hover) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4) !important;
+}
+
+.project-body {
+  padding: 1.3em 1.5em !important;
+}
+
+.project-body h3 {
+  font-size: 1em !important;
+  margin-bottom: 0.2em !important;
+}
+
+.project-meta {
+  font-size: 0.75em !important;
+  color: var(--text-faint) !important;
+  margin-bottom: 0.8em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.project-body > p {
+  font-size: 0.85em !important;
+  line-height: 1.65 !important;
+  color: var(--text-muted) !important;
+}
+
+.project-tech {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin: 0.8em 0 !important;
+}
+.project-tech span {
+  background: var(--accent2-dim) !important;
+  border: 1px solid rgba(167,139,250,0.25) !important;
+  color: var(--accent2) !important;
+  padding: 2px 10px !important;
+  border-radius: 20px !important;
+  font-size: 0.72em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.project-body .actions { margin-bottom: 0 !important; }
+.project-body .button.small {
+  font-size: 0.75em !important;
+  padding: 0.5em 1.2em !important;
+}
+
+/* ── Experience Timeline ─────────────────────────────────── */
+.experience-item {
+  border-left: 2px solid rgba(255,255,255,0.07) !important;
+  padding-left: 1.6em !important;
+  margin-bottom: 2.5em !important;
+  position: relative !important;
+  transition: border-color var(--transition) !important;
+}
+.experience-item:hover {
+  border-left-color: var(--accent) !important;
+}
+.experience-item::before {
+  content: '' !important;
+  width: 9px !important;
+  height: 9px !important;
+  background: var(--accent) !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  left: -5px !important;
+  top: 7px !important;
+  box-shadow: 0 0 0 3px var(--bg), 0 0 8px rgba(0,217,163,0.5) !important;
+  transition: box-shadow var(--transition) !important;
+}
+.experience-item:hover::before {
+  box-shadow: 0 0 0 3px var(--bg), 0 0 15px rgba(0,217,163,0.8) !important;
+}
+
+.company-badge {
+  display: inline-block !important;
+  background: var(--accent-dim) !important;
+  border: 1px solid rgba(0,217,163,0.25) !important;
+  color: var(--accent) !important;
+  font-size: 0.68em !important;
+  padding: 2px 9px !important;
+  border-radius: 4px !important;
+  margin-left: 0.5em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  vertical-align: middle !important;
+  font-weight: 500 !important;
+}
+
+.exp-meta {
+  font-size: 0.78em !important;
+  color: var(--text-faint) !important;
+  margin: 0.3em 0 0.9em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.experience-item ul {
+  list-style: none !important;
+  padding: 0 !important;
+}
+.experience-item ul li {
+  padding: 0.25em 0 0.25em 1.2em !important;
+  position: relative !important;
+  font-size: 0.88em !important;
+  color: var(--text-muted) !important;
+  line-height: 1.65 !important;
+}
+.experience-item ul li::before {
+  content: '▸' !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: var(--accent) !important;
+  font-size: 0.8em !important;
+  top: 0.35em !important;
+}
+
+/* ── Cert Grid ──────────────────────────────────────────── */
+.cert-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 0.8em !important;
+}
+.cert-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  padding: 0.55em 1em !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 0.8em !important;
+  color: var(--text-muted) !important;
+  transition: border-color var(--transition), color var(--transition) !important;
+}
+.cert-item:hover {
+  border-color: rgba(0,217,163,0.3) !important;
+  color: var(--text) !important;
+}
+.cert-item i { color: var(--accent) !important; }
+
+/* ── Language Badges ────────────────────────────────────── */
+.lang-badges {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-top: 0.8em !important;
+}
+.lang-badge {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  padding: 0.7em 1.4em !important;
+  border-radius: var(--radius-sm) !important;
+  min-width: 84px !important;
+  transition: border-color var(--transition), transform var(--transition) !important;
+}
+.lang-badge:hover {
+  border-color: rgba(0,217,163,0.3) !important;
+  transform: translateY(-2px) !important;
+}
+.lang-badge .lang-name {
+  font-weight: 600 !important;
+  font-size: 0.88em !important;
+  color: var(--text) !important;
+}
+.lang-badge .lang-level {
+  font-size: 0.68em !important;
+  color: var(--text-faint) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  margin-top: 3px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ── Section Divider ────────────────────────────────────── */
+.section-divider {
+  border: none !important;
+  border-top: 1px solid var(--border) !important;
+  margin: 0.5em 0 !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+#footer {
+  background: var(--bg-surface) !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 2em 3.5em !important;
+}
+#footer .inner { color: var(--text-muted) !important; }
+
+#footer .icons li a {
+  color: var(--text-faint) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  background: rgba(255,255,255,0.03) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all var(--transition) !important;
+}
+#footer .icons li a:hover {
+  background: var(--accent-dim) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  transform: translateY(-2px) !important;
+}
+
+#footer .copyright li {
+  color: var(--text-faint) !important;
+  font-size: 0.78em !important;
+}
+#footer .copyright li a { color: var(--text-faint) !important; }
+#footer .copyright li::before { border-left-color: var(--border) !important; }
+
+/* ── Status Badge ───────────────────────────────────────── */
+.status-badge {
+  margin-bottom: 1.5em !important;
+  background: rgba(0,217,163,0.05) !important;
+  border: 1px solid rgba(0,217,163,0.2) !important;
+  padding: 8px 14px !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+}
+.status-badge:hover {
+  background: rgba(0,217,163,0.1) !important;
+  border-color: rgba(0,217,163,0.4) !important;
+  transform: none !important;
+}
+.status-badge span.status-text {
+  font-size: 0.82em !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  color: var(--text-muted) !important;
+}
+.status-badge strong { color: #4ade80 !important; }
+
+/* ── Education ──────────────────────────────────────────── */
+#education h4 {
+  color: var(--text) !important;
+  font-size: 0.92em !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.2em !important;
+}
+#education p { font-size: 0.85em !important; }
+
+/* ── Pulse animation (status dot) ──────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  80%, 100% { transform: scale(2.2); opacity: 0; }
+}
+.pulse-dot-outer {
+  position: absolute;
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-color: #22c55e;
+  opacity: 0.6;
+  animation: pulse-ring 1.5s cubic-bezier(0,0,0.2,1) infinite;
+}
+.pulse-dot-inner {
+  position: relative;
+  display: inline-flex;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  background-color: #16a34a;
+}
+
+/* ── Scroll-in animation ───────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.5s ease forwards;
+}
+.fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.fade-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.fade-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.fade-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+/* ── Terminal prompt decoration ────────────────────────── */
+.terminal-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72em;
+  color: var(--text-faint);
+  margin-bottom: 1.2em;
+  letter-spacing: 0.02em;
+}
+.terminal-label .prompt { color: var(--accent); }
+.terminal-label .cmd   { color: var(--text-muted); }
+
+/* ── Responsive overrides ───────────────────────────────── */
+@media screen and (max-width: 980px) {
+  #header {
+    background-image: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  #footer { padding: 1.5em !important; }
+}
+
+@media screen and (max-width: 640px) {
+  .stat-row { gap: 8px !important; }
+  .stat-card { flex: 1 1 calc(50% - 8px) !important; }
+  .project-card { margin-bottom: 1em !important; }
+}
